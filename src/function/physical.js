@@ -1,13 +1,24 @@
 import Dexie from 'dexie'
 import { Db, Get as DbGet } from './../database'
 import * as Consoles from './../config/console'
-
+/**
+ * Return the inline SVG content
+ *
+ * @requires module:config/console
+ * @param {string} Name MTouch, MPlay or M1HD
+ * @returns {string} <svg></svg>
+ */
 const GetConsole = async Name => {
   let parser = new DOMParser()
   let Console = await Consoles[Name].SVG()
   return parser.parseFromString(Console, 'image/svg+xml')
 }
-
+/**
+ * Return a 3 digits length value
+ *
+ * @param {number} val 1, 01, 10, 100
+ * @returns {string} 001, 001, 010, 100
+ */
 const TriDigit = val => {
   var v = val
   while ((v + '').length < 3) {
@@ -15,9 +26,20 @@ const TriDigit = val => {
   }
   return v
 }
-
-const UcWords = s => s && s[0].toUpperCase() + s.slice(1).toLowerCase()
-
+/**
+ *  Return a string with the first letter of each word in uppercase
+ *
+ * @param {string} val loreum
+ * @returns {string} Loreum
+ */
+const UcWords = val => val && val[0].toUpperCase() + val.slice(1).toLowerCase()
+/**
+ *  Populate the text of the CurrentFader
+ *
+ * @param {object} CurrentFader
+ * @param {string} CuelistName
+ * @param {number} LoopID
+ */
 const FillButton = (CurrentFader, CuelistName, LoopID) => {
   let TSpan = CurrentFader.querySelectorAll('tspan')
   if (CuelistName.length > 6) {
@@ -39,7 +61,6 @@ const FillButton = (CurrentFader, CuelistName, LoopID) => {
     TSpan[1].innerHTML = UcWords(CuelistName)
   }
 }
-
 export const Console = {
   M1: async () => {
     return Db.transaction('r', Db.Cuelist, Db.Physical, async () => {
@@ -66,7 +87,6 @@ export const Console = {
 
       // Get the console SVG image
       const SVGMPlay = await Dexie.waitFor(GetConsole('M1HD'))
-      SVGMPlay.querySelector('style').remove()
 
       // Create a dedicated SVG picture for the left part
       let MPlayLeft = SVGMPlay.cloneNode(true)
@@ -108,7 +128,6 @@ export const Console = {
           if (CurrentFader) {
             let Cuelist = await DbGet({ Object: 'Cuelist', Index: 'ID', ItemID: CurrentFader.CuelistID })
             CurrentFader = CurrentMPlayLeft.querySelector(`.SubFader${i}`)
-            console.log(CurrentMPlayLeft, i, CurrentFader)
             if (typeof Cuelist === 'object') {
               CurrentFader.classList.add(`Type-${Cuelist.Type}`)
               CurrentFader.innerHTML = `<a href="#Cuelist-${Cuelist.ID}">${CurrentFader.innerHTML}</a>`
@@ -144,7 +163,6 @@ export const Console = {
       for (let z = 0; z < NumberOfBanks; z++) {
         let NewMTouch = SVGMTouch.cloneNode(true)
         NewMTouch.querySelector('.Bank tspan').innerHTML = TriDigit(z + 1)
-        NewMTouch.querySelector('style').remove()
 
         for (let i = 1; i <= 20; i++) {
           let CurrentFader = await DbGet({ Object: 'Physical', Index: 'TypePageBankPosition', ItemID: `${ListOfBanks[z]}-${i}` })
@@ -188,7 +206,6 @@ export const Console = {
 
       // Get the console SVG image
       const SVGMPlay = await Dexie.waitFor(GetConsole('MPlay'))
-      SVGMPlay.querySelector('style').remove()
 
       // Create a dedicated SVG picture for the left part
       let MPlayLeft = SVGMPlay.cloneNode(true)

@@ -1,8 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" 
   xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 251.2163 145.5864">
-  <style>
-      .FaderLed{fill:currentColor}.Cuelist-Box{font-size:8.36090279px;fill:currentColor;line-height:125%;fill-opacity:1}.Cuelist-Line{text-align:center;text-anchor:middle;stroke-width:.20902258px}.BlackAverageButton,.BlackLargeButton,.BlackSquare,.EncoderFader,.GreyButton{opacity:1;stroke-linejoin:round;stroke-opacity:1;fill-opacity:1;stroke:#000;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:1;fill:#000}.GreyButton{vector-effect:none;stroke-dashoffset:0;stroke:#515151;stroke-linecap:butt;fill:#eaeaea}
-  </style>
   <g class="Background">
     <path fill="#d3d3d3" stroke="#000" stroke-linejoin="round" stroke-width="1.2162478019999998" d="M3.1941.6082A124.5299 402.7811 0 0 0 1.0785 72.793a124.5299 402.7811 0 0 0 2.0701 72.1852h244.8735a124.5299 402.7811 0 0 0 2.1161-72.1852A124.5299 402.7811 0 0 0 248.0675.6082z" paint-order="stroke fill markers"/>
     <g class="ReposeMain" stroke="#000" transform="translate(.6081 -2.0924)">
