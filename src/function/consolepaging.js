@@ -1,5 +1,10 @@
 import Message from './../message'
-
+/**
+ *  Function to Hide/Show the previous or next sibling element
+ *
+ * @param {object} e Event
+ * @param {string} Sibling previousSibling, nextSibling
+ */
 const HideShowSibling = (e, Sibling) => {
   e.preventDefault()
   let Father = e.target.closest('svg')
@@ -11,7 +16,6 @@ const HideShowSibling = (e, Sibling) => {
     SiblingFather.classList.remove('hide')
   }
 }
-
 export default (PlaybackContent, ConsoleClass) => {
   let Console = PlaybackContent.querySelector(ConsoleClass)
   let ConsoleDivs = Console.querySelectorAll('div.LeftSide, div.RightSide')
